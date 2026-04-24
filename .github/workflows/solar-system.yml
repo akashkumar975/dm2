@@ -1,28 +1,27 @@
-name: solar system workflow
+name: solar system workflow 
 
 on: 
-  workflow_dispatch: 
-  push:
-    branches:
-     - main
-     - 'feature/*'
-env: 
-  MONGO_URI: "mongodb+srv://supercluster.d83jj.mongodb.net/superdata"
-  MONGO_USERNAME: superuser
-  MONGO_PASSWORD: "SuperPassword"
+ workflow_dispatch
+ push:
+  branches:
+   - main
+   -feature/**
+
 jobs: 
-   unit-testing:
-     name: unit-testing 
+  unit-testing:
      runs-on: ubuntu-latest
      steps: 
-     - name: checkout repository
-       uses: actions/checkout@v4 
-     - name: setup nodejs version -18 
-       uses: actions/setup-node@v4 
-       with:
-        node-version: 18 
-     - name: inatall dependencies 
-       run: npm install
+      - name: checkout repository
+        uses: actions/checkout@v4 
 
-     - name: unit testing 
-       run:  npm test
+      - name: setup nodejs version-18 
+        uses: actoins/setups-node@v4 
+        with: 
+          node-version: 18 
+      - name: install dependencies
+        run: | 
+            npm install 
+      - name: unit testing 
+        run:  | 
+             npm test
+    
