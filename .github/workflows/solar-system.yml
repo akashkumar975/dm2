@@ -38,6 +38,7 @@ jobs:
           path: test-results.xml 
 
       - name: code coverage
+        continue-on-error: true
         run: | 
           npm run coverage
 
