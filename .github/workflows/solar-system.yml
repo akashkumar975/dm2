@@ -23,7 +23,13 @@ jobs:
       - name: Setup Node.js 18
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 
+          
+      - name: cache dependencies
+        uses: actions/cache@v3
+        with: 
+          path: ~/.npm 
+          key: ubuntu-os-node-modules-hashfiles
 
       - name: Install dependencies
         run: npm install
