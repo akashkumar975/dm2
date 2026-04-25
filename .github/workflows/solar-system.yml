@@ -29,7 +29,7 @@ jobs:
         uses: actions/cache@v3
         with: 
           path: ~/.npm 
-          key: ubuntu-os-node-modules-hashfiles
+          key: ubuntu-os-node-modules-hashfiles('package-lock.json')
 
       - name: Install dependencies
         run: npm install
