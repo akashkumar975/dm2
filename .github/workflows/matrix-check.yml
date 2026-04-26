@@ -1,0 +1,32 @@
+name: matrix workflow
+
+on: 
+ workflow_dispatch: 
+ push: 
+    branches:
+        - main
+        - 'feature/*'
+
+jobs: 
+ unit-testing: 
+   name: unit testing 
+   strategy: 
+    matrix: 
+        nodejs_version: [18,19,20]
+        operating_system: [ubuntu-latest,windows-latest]
+        exclude: 
+            - nodejs_version: 18
+              opeating_systetm: windows-latest
+   runs-on: $ {{ matrix.operating_system}}  
+   steps: 
+        - name: checkout repositry
+          uses: actions/checkout@v4
+        - name: setup nodejs version -28 
+          uses: actions/setup-node@v4
+          with: 
+            node-version: ${{ matrix.nodejs_version}} 
+        - name: install dependencies
+          run: npm install
+            
+
+                
