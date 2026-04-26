@@ -9,7 +9,7 @@ on:
 
 jobs: 
  unit-testing: 
-   name: unit testing 
+   name: ${{ matrix.operating_system}}
    strategy: 
     matrix: 
         nodejs_version: [18,19,20]
