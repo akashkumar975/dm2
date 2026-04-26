@@ -1,31 +1,31 @@
-# name: solar system workflow 
+name: solar system workflow 
 
-# on: 
-#  workflow_dispatch: 
-#  push: 
-#     branches: 
-#         - main
-#         - 'feature/*' 
-# jobs:
-#   unit-testing: 
-#      name: unit testing 
-#      runs-on: ubuntu-latest 
-#      steps: 
-#        - name: checkout repo
-#          uses: actions/checkout@v4
+on: 
+ workflow_dispatch: 
+ push: 
+    branches: 
+        - main
+        - 'feature/*' 
+jobs:
+  unit-testing: 
+     name: unit testing 
+     runs-on: ubuntu-latest 
+     steps: 
+       - name: checkout repo
+         uses: actions/checkout@v4
 
-#        - name: setups node js version - 18 
-#          uses: actions/setup-node@v4 
-#          with: 
-#             node-version: 18
+       - name: setups node js version - 18 
+         uses: actions/setup-node@v4 
+         with: 
+            node-version: 18
 
-#        - name: install dependencies 
-#          run: npm install 
-#        - name: unit testing 
-#          run: npm test 
-#        - name: archive test result 
-#          uses: actions/upload-artifact@v4
-#          with: 
-#             name: mocha-test-result
-#             path: test-results.xml
+       - name: install dependencies 
+         run: npm install 
+       - name: unit testing 
+         run: npm test 
+       - name: archive test result 
+         uses: actions/upload-artifact@v4
+         with: 
+            name: mocha-test-result
+            path: test-results.xml
  
