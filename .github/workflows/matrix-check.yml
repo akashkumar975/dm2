@@ -16,7 +16,7 @@ jobs:
         operating_system: [ubuntu-latest,windows-latest]
         exclude: 
             - nodejs_version: 18
-              opeating_systetm: windows-latest
+              opeating_system: windows-latest
    runs-on: $ {{ matrix.operating_system}}  
    steps: 
         - name: checkout repositry
