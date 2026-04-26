@@ -35,7 +35,7 @@ jobs:
         - name: checkout repository
           uses: actions/checkout@v4
         - name: setups nodejs verson-18
-          uses: actions/setuup-node@v4
+          uses: actions/setup-node@v4
           with:
              node-version: 18 
         - name: install dependciest
