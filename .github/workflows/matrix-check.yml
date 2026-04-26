@@ -17,7 +17,7 @@ jobs:
         exclude: 
             - nodejs_version: 18
               operating_system: windows-latest
-   runs-on: $ {{ matrix.operating_system}}  
+   runs-on: ${{ matrix.operating_system}}  
    steps: 
         - name: checkout repositry
           uses: actions/checkout@v4
