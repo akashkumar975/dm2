@@ -21,9 +21,9 @@ jobs:
        - name: cache step
          uses: actions/cache@v5
          with: 
-           path:  node_modules
-           key: node-modules-${{ hashFiles('package-lock.json')}}
-       - name: install dependencies 
+           path:  node_modules    # which file to be cache 
+           key: node-modules-${{ hashFiles('package-lock.json')}} # hash will be same 
+       - name: install dependencies  
          run: npm install 
        - name: unit testing 
          continue-on-error: true 
