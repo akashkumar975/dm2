@@ -48,4 +48,11 @@ jobs:
         with: 
            username: "anksonu92"
            password:  "Changeme@123"
+      - name: docker build for testing 
+        uses: docker/build-push-action@v4 
+        with: 
+          context: . 
+          push: true 
+          tags: anksonu92/solar-system:${{ github.sha }} 
+
  
