@@ -36,4 +36,16 @@ jobs:
          with: 
             name: mocha-test-result
             path: test-results.xml
+  docker: 
+    name: containerization 
+    needs: [unit-testing]
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: checkout 
+        uses: actions/checkout@4
+      - name: dockerhub login 
+        uses: docker/login-action@v4.0
+        with: 
+           username: "anksonu92"
+           password:  "Chnageme@123"
  
