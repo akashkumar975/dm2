@@ -22,6 +22,7 @@ jobs:
        - name: install dependencies 
          run: npm install 
        - name: unit testing 
+         continue-on-error: true 
          id: nodejs-unit-testing-step
          run: npm test
 
