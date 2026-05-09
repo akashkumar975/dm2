@@ -1,28 +1,58 @@
-name: solar system workflow
+name: solar system workflow 
 
 on: 
-  workflow_dispatch: 
-  push:
-    branches:
-     - main
-     - 'feature/*'
-env: 
-  MONGO_URI: "mongodb+srv://supercluster.d83jj.mongodb.net/superdata"
-  MONGO_USERNAME: superuser
-  MONGO_PASSWORD: "SuperPassword"
-jobs: 
-   unit-testing:
-     name: unit-testing 
-     runs-on: ubuntu-latest
+ workflow_dispatch: 
+ push: 
+    branches: 
+        - main
+        - 'feature/*' 
+jobs:
+  unit-testing: 
+     name:    unit testing 
+     runs-on: ubuntu-latest 
      steps: 
-     - name: checkout repository
-       uses: actions/checkout@v4 
-     - name: setup nodejs version -18 
-       uses: actions/setup-node@v4 
-       with:
-        node-version: 18 
-     - name: inatall dependencies 
-       run: npm install
+       - name: checkout repo
+         uses: actions/checkout@v4
 
-     - name: unit testing 
-       run:  npm test
+       - name: setups node js version - 18 
+         uses: actions/setup-node@v4 
+         with: 
+            node-version: 18
+       - name: cache step
+         uses: actions/cache@v5
+         with: 
+           path:  node_modules    # which file to be cache 
+           key: node-modules-${{ hashFiles('package-lock.json')}} # hash will be same 
+       - name: install dependencies  
+         run: npm install 
+       - name: unit testing 
+         continue-on-error: true 
+         id: nodejs-unit-testing-step
+         run: npm test
+
+       - name: archive test result
+         if: always ()
+         uses: actions/upload-artifact@v4
+         with: 
+            name: mocha-test-result
+            path: test-results.xml
+  docker: 
+    name: containerization 
+    needs: [unit-testing]
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: checkout 
+        uses: actions/checkout@v4
+      - name: dockerhub login 
+        uses: docker/login-action@v4 
+        with: 
+           username: "anksonu92"
+           password:  "Changeme@123"
+      - name: docker build for testing 
+        uses: docker/build-push-action@v4 
+        with: 
+          context: . 
+          push: true 
+          tags: anksonu92/solar-system:${{ github.sha }} 
+
+ 
