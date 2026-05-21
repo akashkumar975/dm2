@@ -23,3 +23,12 @@ jobs:
            format: 'table'
            exit-code: '1'
            severity: 'CRITICAL'
+           output: 'trivy-scan-result.txt'
+           
+       - name: upload trivy scan result
+         if: always()
+         uses: actions/upload-artifact@v4
+         with: 
+            name: trivy-scan-result         
+            path: trivy-scan-result.txt
+            retention-days: 7
