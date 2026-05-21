@@ -1,0 +1,26 @@
+name: trivy scan workflow
+
+on: 
+ workflow_dispatch: 
+ push: 
+    branches: 
+        - main
+        - 'feature/*'
+
+jobs:
+  trivy-scan: 
+     name:    trivy scan
+     runs-on: ubuntu-latest
+     steps:
+       - name: checkout repo
+         uses: actions/checkout@v4
+       - name: build docker image
+         run: docker build -t anksonu92/solar-system:${{ github.sha }} .
+       - name: trivy scan
+         uses: aquasecurity/trivy-action@v0.36.0
+         with:
+           image-ref: anksonu92/solar-system:${{ github.sha }}
+           format: 'table'
+           exit-code: '1'
+           severity: 'CRITICAL'
+\
